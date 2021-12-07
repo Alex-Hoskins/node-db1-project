@@ -31,7 +31,8 @@ async function updateById(id, account){
   const numberAffected = await db('accounts')
     .where('id', id)
     .update(account)
-  return numberAffected
+  const newaccount = await getById(id)
+  return newaccount
 }
 
 async function deleteById(id) {

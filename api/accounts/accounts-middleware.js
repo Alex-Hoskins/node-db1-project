@@ -1,16 +1,16 @@
 const Account = require('./accounts-model')
 
 exports.checkAccountPayload = async (req, res, next) => {
-  let name = req.body.name.trim();
+  let name = req.body.name
   let budget = req.body.budget;
-  req.body.name= name
+  
   if (!name || !budget){
     next({ status: 400, message: "name and budget are required" })
   }
   else if(typeof(name) !== 'string'){
     next({ status: 400, message: "name of account must be a string" })
   }
-  else if(name.length < 3 || name.length >100){
+  else if(name.trim().length < 3 || name.trim().length >100){
     next({ status: 400, message: "name of account must be between 3 and 100" })
   }
   else if(typeof(budget) !== 'number' && Number.isFinite(budget)){
